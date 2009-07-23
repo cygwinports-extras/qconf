@@ -1,0 +1,11 @@
+inherit qt4-qmake
+
+DESCRIPTION="Creates configure scripts for QMake-based projects"
+HOMEPAGE="http://delta.affinix.com/qconf/"
+SRC_URI="http://delta.affinix.com/download/${P}.tar.bz2"
+
+src_compile() {
+	cd ${B}
+	${S}/configure --prefix=/usr --qtdir=${QT4_QTDIR} || error "qconf configure failed"
+	cygmake
+}
