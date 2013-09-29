@@ -1,0 +1,22 @@
+inherit qt4-qmake
+
+NAME="qconf"
+VERSION=1.4
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Creates configure scripts for QMake-based projects"
+DESCRIPTION="QConf allows you to have a nice configure script for your qmake-
+based project. It is intended for developers who don't need (or want) to use
+the more complex GNU autotools. With qconf/qmake, it is easy to maintain a
+cross-platform project that uses a familiar configuration interface on unix."
+REQUIRES="libQtCore4-devel"
+HOMEPAGE="http://delta.affinix.com/qconf/"
+SRC_URI="http://delta.affinix.com/download/qconf-${VERSION}.tar.bz2"
+
+src_compile() {
+	cd ${B}
+	lndirs
+	./configure --prefix=/usr --qtdir=${QT4_QTDIR} || error "qconf configure failed"
+	cygqmake4 qconf.pro
+	cygmake
+}
